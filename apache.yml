@@ -1,0 +1,17 @@
+- hosts: 172.31.1.79
+  become: yes
+  tasks:
+    - name: install apache server
+      yum:
+        name: httpd
+        state: present
+    - name: copy code to remote
+      copy:
+        src: index.html
+        dest: /var/www/html
+    - name: start apache server
+      service:
+        name: httpd
+        enabled: yes
+        state: started
+      
